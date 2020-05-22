@@ -1,4 +1,4 @@
-# Foobar
+# dotMeme
 
 dotMeme is a program that allows you to make memes using JSON!
 
