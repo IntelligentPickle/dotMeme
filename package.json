@@ -1,0 +1,14 @@
+{
+  "name": "dotmeme",
+  "version": "1.0.0",
+  "description": "dotMeme is an easy to use meme \"compression\" format.",
+  "main": "dotmeme.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Griffin Bauer",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.6.1"
+  }
+}
