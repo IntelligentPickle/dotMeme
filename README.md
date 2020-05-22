@@ -26,6 +26,12 @@ After you do the above, run `npm install`.
 node . foo.meme (or any json file with the right contents)
 ```
 
+## Creating a .meme
+A .meme file is just a regular JSON file, but renamed to an extension i thought was appropiate.
+
+You can mess around with the values in `template.meme` to manipulate how the assembled image looks like.
+
+
 ## Contributing
 Pull requests are welcome! Make sure that you file an issue for major changes.
 
