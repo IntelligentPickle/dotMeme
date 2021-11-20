@@ -4,10 +4,16 @@ var fs = require('fs'); // For reading files
 
 filename = process.argv[2];
 fs.readFile(filename, 'utf8', async function(err, data) {
-    if (err) throw err;
+    if (err) {
+        console.error('Error reading .meme file:', err.message)
+        return;
+    }; // There was an error reading the .meme file.
 
+    // Parse the JSON.
     const parsedData = JSON.parse(data)
 
+
+    // TODO: make like everything better.
     loadImage(parsedData.imageDetails.backgroundImage).then((image) => {
     const canvas = createCanvas(image.width, image.height)
     const ctx = canvas.getContext('2d')
