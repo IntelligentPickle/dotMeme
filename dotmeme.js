@@ -24,9 +24,15 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
     const canvas = createCanvas(image.width, image.height);
     const ctx = canvas.getContext('2d')
     ctx.drawImage(image, 0, 0, image.width, image.height)
-    logger.info('Canvas created with background!')
+    logger.info('Canvas created with background. Now writing text elements.')
 
-    const out = fs.createWriteStream(`out.png`)
+    parsedData.textElements.forEach(element => {
+        ctx.font = element.font
+        ctx.fillStyle = element.color
+        ctx.fillText(element.text, element.x, element.y)
+    });
+
+    const out = fs.createWriteStream(`outA.png`)
     const stream = canvas.createPNGStream()
     stream.pipe(out)
     out.on('finish', () =>  console.log(`Successfully assembled meme. (took ${process.uptime()} seconds)`))

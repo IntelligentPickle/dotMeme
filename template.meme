@@ -2,7 +2,12 @@
     "dotMemeVer": "2",
     "background": "https://upload.wikimedia.org/wikipedia/en/0/0b/Nickelodeon_SpongeBob_SquarePants_Characters_Cast.png",
     "textElements": [
-       {},
-       {}
+        {
+            "x": 40,
+            "y": 100,
+            "text": "Hello, from apple world!",
+            "font": "10px Hack",
+            "color": "#000000"
+        }
     ]
 }
