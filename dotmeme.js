@@ -2,7 +2,7 @@ const { createCanvas, loadImage } = require('canvas')
 const fs = require('fs'); // For reading files
 const logger = require('./logger') // Set up default logger
 const winston = require('winston')
-
+const path = require('path')
 if (!process.argv[2]) {
     logger.error('Missing .meme argument.')
     return;
@@ -39,10 +39,10 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         ctx.fillText(element.text, element.x, element.y)
     });
 
-    const out = fs.createWriteStream(`outA.png`)
+    const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
     const stream = canvas.createPNGStream()
     stream.pipe(out)
-    out.on('finish', () =>  logger.info(`Successfully assembled meme. (took ${process.uptime()} seconds)`))
+    out.on('finish', () =>  logger.info(`Successfully assembled meme. Saved as ${path.basename(process.argv[2], '.meme')}.png`))
 })
 
 
