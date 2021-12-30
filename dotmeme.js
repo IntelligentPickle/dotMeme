@@ -23,7 +23,7 @@ fs.readFile(filename, 'utf8', async function(err, data) {
     ctx.font = parsedData.textDetails.topTextFont
     ctx.fillText(parsedData.textDetails.topTextContent, 50, 100)
 
-    const out = fs.createWriteStream(__dirname + '/test.png')
+    const out = fs.createWriteStream(__dirname + `out.png`)
     const stream = canvas.createPNGStream()
     stream.pipe(out)
     out.on('finish', () =>  console.log(`Successfully assembled meme. (took ${process.uptime()} seconds)`))
