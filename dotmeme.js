@@ -19,32 +19,38 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
 
     // TODO: make like everything better.
     loadImage(parsedData.background).then((image) => {
-    logger.info(`Loaded background.`)
-    logger.info(`Dimensions from bg: ${image.width}x${image.height}`)
-    const canvas = createCanvas(image.width, image.height);
-    const ctx = canvas.getContext('2d')
-    ctx.drawImage(image, 0, 0, image.width, image.height)
-    logger.info('Canvas created with background. Now writing text elements.')
+        logger.info(`Loaded background.`)
+        logger.info(`Dimensions from bg: ${image.width}x${image.height}`)
+        const canvas = createCanvas(image.width, image.height);
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(image, 0, 0, image.width, image.height)
+        logger.info('Writing text elements.')
 
-    parsedData.textElements.forEach((element, i) => {
-        // Really bad checking :D
-        // Todo: fix this and make it better
-        if (!element.font) { logger.warn(`Font is missing from element ${i}`)}
-        if (!element.color) { logger.warn(`Color is missing from element ${i}`)}
-        if (!element.text) { logger.warn(`Text is missing from element ${i}`)}
-        if (!element.x) { logger.warn(`X pos is missing from element ${i}`)}
-        if (!element.y) { logger.warn(`Y pos is missing from element ${i}`)}
+        parsedData.textElements.forEach(async (element, i) => {
+            // Really bad checking :D
+            // Todo: fix this and make it better
+            if (!element.font) { logger.warn(`Font is missing from element ${i}`)}
+            if (!element.color) { logger.warn(`Color is missing from element ${i}`)}
+            if (!element.text) { logger.warn(`Text is missing from element ${i}`)}
+            if (!element.x) { logger.warn(`X pos is missing from element ${i}`)}
+            if (!element.y) { logger.warn(`Y pos is missing from element ${i}`)}
 
-        ctx.font = element.font
-        ctx.fillStyle = element.color
-        ctx.fillText(element.text, element.x, element.y)
-    });
+            ctx.font = element.font
+            ctx.fillStyle = element.color
+            ctx.fillText(element.text, element.x, element.y)
+        });
 
-    const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
-    const stream = canvas.createPNGStream()
-    stream.pipe(out)
-    out.on('finish', () =>  logger.info(`Successfully assembled meme. Saved as ${path.basename(process.argv[2], '.meme')}.png`))
-})
+        logger.info('Writing image elements.')
+        parsedData.imageElements.forEach(async (element, i) => {
+            let img = await loadImage(element.dataUrl)
+            ctx.drawImage(img, element.x, element.y, img.width, img.height)
+        });
+
+        const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
+        const stream = canvas.createPNGStream()
+        stream.pipe(out)
+        out.on('finish', () =>  logger.info(`Successfully assembled meme. Saved as ${path.basename(process.argv[2], '.meme')}.png`))
+    })
 
 
 });

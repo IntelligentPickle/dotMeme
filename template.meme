@@ -12,9 +12,9 @@
     ],
     "imageElements": [
         {
-            "x": 100,
+            "x": 40,
             "y": 100,
-            "dataUrl": ""
+            "dataUrl": "https://static.wikia.nocookie.net/characters/images/6/6b/309.png"
         }
     ]
 }
