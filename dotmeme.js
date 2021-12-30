@@ -23,14 +23,13 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
     logger.info(`Canvas will be created with dimensions from bg: ${image.width}x${image.height}`)
     const canvas = createCanvas(image.width, image.height);
     const ctx = canvas.getContext('2d')
-    logger.info('Canvas created!')
-
     ctx.drawImage(image, 0, 0, image.width, image.height)
+    logger.info('Canvas created with background!')
 
-    // const out = fs.createWriteStream(__dirname + `out.png`)
-    // const stream = canvas.createPNGStream()
-    // stream.pipe(out)
-    // out.on('finish', () =>  console.log(`Successfully assembled meme. (took ${process.uptime()} seconds)`))
+    const out = fs.createWriteStream(`out.png`)
+    const stream = canvas.createPNGStream()
+    stream.pipe(out)
+    out.on('finish', () =>  console.log(`Successfully assembled meme. (took ${process.uptime()} seconds)`))
 })
 
 
