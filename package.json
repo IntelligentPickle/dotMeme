@@ -9,6 +9,7 @@
   "author": "Griffin Bauer",
   "license": "ISC",
   "dependencies": {
-    "canvas": "^2.6.1"
+    "canvas": "^2.8.0",
+    "winston": "^3.3.3"
   }
 }

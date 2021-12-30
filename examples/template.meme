@@ -1,0 +1,20 @@
+{
+    "dotMemeVer": "2",
+    "background": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
+    "textElements": [
+        {
+            "x": 240,
+            "y": 90,
+            "text": "We should take Bikini Bottom, \nand push it somewhere else!",
+            "font": "30px Hack",
+            "color": "#000000"
+        }
+    ],
+    "imageElements": [
+        {
+            "x": 0,
+            "y": 30,
+            "url": "patrickstar.png"
+        }
+    ]
+}
