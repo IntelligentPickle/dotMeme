@@ -3,18 +3,18 @@
     "background": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
     "textElements": [
         {
-            "x": 0,
-            "y": 7,
-            "text": "Hello, from apple world!",
-            "font": "10px Hack",
+            "x": 240,
+            "y": 90,
+            "text": "We should take Bikini Bottom, \nand push it somewhere else!",
+            "font": "30px Hack",
             "color": "#000000"
         }
     ],
     "imageElements": [
         {
             "x": 0,
-            "y": 0,
-            "dataUrl": "https://static.wikia.nocookie.net/characters/images/6/6b/309.png"
+            "y": 30,
+            "url": "patrickstar.png"
         }
     ]
 }

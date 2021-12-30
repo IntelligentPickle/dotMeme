@@ -24,20 +24,18 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0, image.width, image.height)
-
-        logger.info('Writing image elements.')
+        logger.info('Writing elements.')
         parsedData.imageElements.forEach(async (element, i) => {
-            let img = loadImage(element.dataUrl)
-            img.then((image) => {
-                ctx.drawImage(image, element.x , element.y, 100, 100)
+            logger.info(`[IMG] ${i} - X:${element.x} Y:${element.y} URL:${element.url}`)
+
+            await loadImage(element.url).then((image) => {
+                ctx.drawImage(image, element.x , element.y)
             }).catch(err => {
                 logger.error(`Failed to render img element ${i}: ${err}`)
             })
         });
-
-        logger.info('Writing text elements.')
         parsedData.textElements.forEach(async (element, i) => {
-            logger.info(`[TXT] ${i} - X:${element.x} Y:${element.y}`)
+            logger.info(`[TXT] ${i} - X: ${element.x} Y: ${element.y} CONT: ${element.text}`)
             ctx.font = element.font
             ctx.fillStyle = element.color
             ctx.fillText(element.text, element.x, element.y)
@@ -46,7 +44,7 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
         const stream = canvas.createPNGStream()
         stream.pipe(out)
-        out.on('finish', () =>  logger.info(`Successfully assembled meme. Saved as ${path.basename(process.argv[2], '.meme')}.png`))
+        out.on('finish', () =>  logger.info(`Successfully assembled meme as ${path.basename(process.argv[2], '.meme')}.png`))
     })
 
 
