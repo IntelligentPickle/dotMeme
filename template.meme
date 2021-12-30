@@ -1,11 +1,8 @@
-{  
-    "dotMemeVer": "1",
-     "imageDetails": {  
-        "backgroundImage": ""
-     },
-     "textDetails": {
-        "topTextFont": "30px Arial",
-        "topTextContent": "tHiS mEmE wAs MaDe wItH dOtMeME"
-
-     }
- }  
+{
+    "dotMemeVer": "2",
+    "background": "",
+    "textElements": [
+       {},
+       {}
+    ]
+}
