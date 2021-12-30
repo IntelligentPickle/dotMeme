@@ -1,10 +1,10 @@
 {
     "dotMemeVer": "2",
-    "background": "https://upload.wikimedia.org/wikipedia/en/0/0b/Nickelodeon_SpongeBob_SquarePants_Characters_Cast.png",
+    "background": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
     "textElements": [
         {
-            "x": 40,
-            "y": 100,
+            "x": 0,
+            "y": 7,
             "text": "Hello, from apple world!",
             "font": "10px Hack",
             "color": "#000000"
@@ -12,8 +12,8 @@
     ],
     "imageElements": [
         {
-            "x": 40,
-            "y": 100,
+            "x": 0,
+            "y": 0,
             "dataUrl": "https://static.wikia.nocookie.net/characters/images/6/6b/309.png"
         }
     ]

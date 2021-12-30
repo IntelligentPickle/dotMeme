@@ -24,26 +24,23 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0, image.width, image.height)
-        logger.info('Writing text elements.')
-
-        parsedData.textElements.forEach(async (element, i) => {
-            // Really bad checking :D
-            // Todo: fix this and make it better
-            if (!element.font) { logger.warn(`Font is missing from element ${i}`)}
-            if (!element.color) { logger.warn(`Color is missing from element ${i}`)}
-            if (!element.text) { logger.warn(`Text is missing from element ${i}`)}
-            if (!element.x) { logger.warn(`X pos is missing from element ${i}`)}
-            if (!element.y) { logger.warn(`Y pos is missing from element ${i}`)}
-
-            ctx.font = element.font
-            ctx.fillStyle = element.color
-            ctx.fillText(element.text, element.x, element.y)
-        });
 
         logger.info('Writing image elements.')
         parsedData.imageElements.forEach(async (element, i) => {
-            let img = await loadImage(element.dataUrl)
-            ctx.drawImage(img, element.x, element.y, img.width, img.height)
+            let img = loadImage(element.dataUrl)
+            img.then((image) => {
+                ctx.drawImage(image, element.x , element.y, 100, 100)
+            }).catch(err => {
+                logger.error(`Failed to render img element ${i}: ${err}`)
+            })
+        });
+
+        logger.info('Writing text elements.')
+        parsedData.textElements.forEach(async (element, i) => {
+            logger.info(`[TXT] ${i} - X:${element.x} Y:${element.y}`)
+            ctx.font = element.font
+            ctx.fillStyle = element.color
+            ctx.fillText(element.text, element.x, element.y)
         });
 
         const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
