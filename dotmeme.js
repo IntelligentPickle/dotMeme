@@ -28,6 +28,7 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
 
     parsedData.textElements.forEach((element, i) => {
         // Really bad checking :D
+        // Todo: fix this and make it better
         if (!element.font) { logger.warn(`Font is missing from element ${i}`)}
         if (!element.color) { logger.warn(`Color is missing from element ${i}`)}
         if (!element.text) { logger.warn(`Text is missing from element ${i}`)}

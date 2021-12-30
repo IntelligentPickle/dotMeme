@@ -9,5 +9,12 @@
             "font": "10px Hack",
             "color": "#000000"
         }
+    ],
+    "imageElements": [
+        {
+            "x": 100,
+            "y": 100,
+            "dataUrl": ""
+        }
     ]
 }
