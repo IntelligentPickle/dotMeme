@@ -19,8 +19,11 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
 
     // TODO: make like everything better.
     loadImage(parsedData.background).then((image) => {
-    const canvas = createCanvas(image.width, image.height)
+    logger.info(`Loaded background.`)
+    logger.info(`Canvas will be created with dimensions from bg: ${image.width}x${image.height}`)
+    const canvas = createCanvas(image.width, image.height);
     const ctx = canvas.getContext('2d')
+    logger.info('Canvas created!')
 
     ctx.drawImage(image, 0, 0, image.width, image.height)
 
