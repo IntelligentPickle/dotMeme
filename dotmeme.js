@@ -22,6 +22,7 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
     }
 
     const parsedData = JSON.parse(data); // Parsing but to a var
+    logger.info(`Reading .meme version ${parsedData.dotMemeVer}`)
     // TODO: make like everything better.
     loadImage(parsedData.background).then((image) => {
         logger.info(`Loaded background.`)
@@ -31,8 +32,6 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         ctx.drawImage(image, 0, 0, image.width, image.height)
         logger.info('Writing elements.')
         
-        const parsedData = JSON.parse(data);
-
         parsedData.textElements.forEach(async (element, i) => {
             logger.info(`[TXT] ${i} - X: ${element.x} Y: ${element.y} CONT: ${element.text}`)
             ctx.font = element.font
