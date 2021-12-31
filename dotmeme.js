@@ -15,13 +15,13 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
 
     // Parse the JSON.
     try {
-        const parsedData = JSON.parse(data);
-        logger.info('Parsed JSON.');
+        JSON.parse(data);
     } catch {
         logger.error('Failed to parse .meme file. Is it a proper JSON file?')
         return;
     }
 
+    const parsedData = JSON.parse(data); // Parsing but to a var
     // TODO: make like everything better.
     loadImage(parsedData.background).then((image) => {
         logger.info(`Loaded background.`)
@@ -30,20 +30,26 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0, image.width, image.height)
         logger.info('Writing elements.')
-        parsedData.imageElements.forEach(async (element, i) => {
-            logger.info(`[IMG] ${i} - X:${element.x} Y:${element.y} URL:${element.url}`)
+        
+        const parsedData = JSON.parse(data);
 
-            await loadImage(element.url).then((image) => {
-                ctx.drawImage(image, element.x , element.y)
-            }).catch(err => {
-                logger.error(`Failed to render img element ${i}: ${err}`)
-            })
-        });
         parsedData.textElements.forEach(async (element, i) => {
             logger.info(`[TXT] ${i} - X: ${element.x} Y: ${element.y} CONT: ${element.text}`)
             ctx.font = element.font
             ctx.fillStyle = element.color
             ctx.fillText(element.text, element.x, element.y)
+            logger.info(`[TXT] ${i} - RENDERED`)
+        });
+
+        parsedData.imageElements.forEach(async (element, i) => {
+            logger.info(`[IMG] ${i} - X:${element.x} Y:${element.y} URL:${element.url}`)
+
+            await loadImage(element.url).then((image) => {
+                ctx.drawImage(image, element.x , element.y)
+                logger.info(`[IMG] ${i} - RENDERED`)
+            }).catch(err => {
+                logger.error(`[IMG] ${i} - FAILED (${err})`)
+            })
         });
 
         const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
