@@ -54,7 +54,7 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
         const out = fs.createWriteStream(`${path.basename(process.argv[2], '.meme')}.png`)
         const stream = canvas.createPNGStream()
         stream.pipe(out)
-        out.on('finish', () =>  logger.info(`Successfully assembled meme as ${path.basename(process.argv[2], '.meme')}.png`))
+        out.on('finish', () =>  logger.info(`Successfully assembled meme as ${path.basename(process.argv[2], '.meme')}.png. Took ${process.uptime()} seconds`))
     })
 
 
