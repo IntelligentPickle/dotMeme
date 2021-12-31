@@ -1,6 +1,6 @@
 # dotMeme
 
-dotMeme is a program that allows you to make memes using JSON!
+dotMeme is a meme compiler. It allows you to create memes using JSON, and compile them into an image.
 
 ## Usage
 Do `yarn install` to install all of the dependencies. Then do:
@@ -10,9 +10,34 @@ node . foo.meme (or any json file with the right contents)
 ```
 
 ## Creating a .meme
-A .meme file is just a regular JSON file, but renamed to an extension i thought was appropiate.
+A .meme file is just a regular JSON file, but renamed to an extension I thought was appropiate.
 
-You can mess around with the values in `template.meme` to manipulate how the assembled image looks like.
+This is an example of a `.meme` file:
+```json
+{
+    "dotMemeVer": "2",
+    "background": "link_to_image",
+    "textElements": [
+        {
+            "x": xPos,
+            "y": yPos,
+            "text": "text_contents",
+            "font": "XYpx FontName",
+            "color": "name_of_color/hex_code"
+        }
+    ],
+    "imageElements": [
+        {
+            "x": xPos,
+            "y": yPos,
+            "url": "link_to_image"
+        }
+    ],
+    "effects": ["someEffect"]
+}
+```
+
+All of these values can be modified to your choosing, but **do not** change the structure, or else dotMeme will not be able to compile it correctly. For text content, escape characters (for example, `\n`) can be used.
 
 
 ## Contributing
