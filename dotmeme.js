@@ -14,8 +14,13 @@ fs.readFile(process.argv[2], 'utf8', async function(err, data) {
     }; // There was an error reading the .meme file.
 
     // Parse the JSON.
-    const parsedData = JSON.parse(data)
-    logger.info('Parsed JSON.')
+    try {
+        const parsedData = JSON.parse(data);
+        logger.info('Parsed JSON.');
+    } catch {
+        logger.error('Failed to parse .meme file. Is it a proper JSON file?')
+        return;
+    }
 
     // TODO: make like everything better.
     loadImage(parsedData.background).then((image) => {
